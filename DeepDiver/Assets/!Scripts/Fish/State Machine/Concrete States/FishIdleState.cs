@@ -1,7 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class FishIdleState : FishState
 {
+    private bool startedFindingPositions = false;
+
     public FishIdleState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
     {
 
@@ -16,7 +19,9 @@ public class FishIdleState : FishState
     {
         base.EnterState();
 
+        if (startedFindingPositions) return;
         fish.StartChangeTargetPosition();
+        startedFindingPositions = true;
     }
 
     public override void ExitState()
@@ -28,7 +33,17 @@ public class FishIdleState : FishState
     {
         base.FrameUpdate();
 
-        fish.MoveFish(fish.targetPosition, fish.speed);
+        if (fish.IsScared)
+        {
+            fish.StateMachine.ChangeState(fish.ScaredState);
+            Debug.Log("Fish Got Scared.");
+        }
+        if (fish.IsGrabbed)
+        {
+            fish.StateMachine.ChangeState(fish.GrabbedState);
+        }
+        Vector3 targetDirection = (fish.targetPosition - fish.transform.position).normalized;
+        fish.MoveAndRotateFish(fish.targetPosition, targetDirection, fish.speed);
     }
 
     public override void PhysicsUpdate()

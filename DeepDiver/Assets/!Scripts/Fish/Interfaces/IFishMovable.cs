@@ -4,5 +4,5 @@ public interface IFishMovable
 {
     Rigidbody RB { get; set; }
 
-    void MoveFish(Vector3 _targetPosition, float speed);
+    void MoveAndRotateFish(Vector3 _targetPosition, Vector3 _targetDirection, float speed);
 }
