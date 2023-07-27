@@ -1,9 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
-public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
+public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckable
 {
     public int MaxHealth { get; set; } = 1;
     public int CurrentHealth { get; set; }
@@ -16,14 +14,14 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
     public bool IsScared { get; set; }
     public bool IsGrabbed { get; set; }
 
-    [Header("Idle Movement Settings")]
+    [Header("Idle Movement Variables")]
     [SerializeField] public float speed = 2f;
     public float Speed { get { return speed; } private set { } }
     [SerializeField] protected float rotateSpeed = 5f;
     [SerializeField] protected float _targetChangeTime = 2f;
     [SerializeField] protected Transform areaBoundary;
 
-    [Header("Escaping Movement Settings")]
+    [Header("Escaping Movement Variables")]
     [SerializeField] protected float _escapeTime = 2f;
     [SerializeField] protected float speedMult = 4;
     public float SpeedMult { get { return speedMult; } private set { } }
@@ -107,6 +105,7 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
 
     public void Die()
     {
+        Debug.Log("Fish Died!");
         Destroy(gameObject);
     }
 

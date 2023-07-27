@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ITriggerCheckable
+public interface IFishTriggerCheckable
 {
     bool IsScared { get; set; }
     bool IsGrabbed { get; set; }
