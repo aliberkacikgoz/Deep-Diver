@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
 
     //Yine ayný þekilde bu bilginin iletimini saðlayan event burda
-    public static event Action<GameState> OnStateChanged;
+    public static event Action<GameState> OnGameStateChanged;
 
     private void Awake()
     {
@@ -43,11 +43,11 @@ public class GameManager : MonoBehaviour
         //iþlemler buraya
         switch (newState)
         {
-            case GameState.Diving:
+            case GameState.Playing:
                 break;
-            case GameState.InSubmarine:
+            case GameState.Paused:
                 break;
-            case GameState.DrivingSubmarine:
+            case GameState.GameOver:
                 break;
             default:
                 break;
@@ -55,14 +55,14 @@ public class GameManager : MonoBehaviour
 
         //State deðiþtiði zaman eventi tetikleyerek
         //dinleyen tüm scriptlere bilgi verir
-        OnStateChanged?.Invoke(newState);
+        OnGameStateChanged?.Invoke(newState);
     }
 }
 
 //Aklýnýza gelen farklý stateleri buraya ekleyebilirsiniz
 public enum GameState
 {
-    Diving,
-    InSubmarine,
-    DrivingSubmarine,
+    Playing,
+    Paused,
+    GameOver,
 }
