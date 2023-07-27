@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 1537786153}
   - component: {fileID: 1537786152}
   - component: {fileID: 1537786151}
+  - component: {fileID: 1537786154}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1011,6 +1012,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1537786154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537786150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055bc1745489cfb47a8b2a285e76622e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moneyTMP: {fileID: 1435643567}
+  _currentPlayerMoney: 0
+  _lerpTime: 0
 --- !u!1 &1547322596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,6 +1354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3988839546480079769, guid: 00157de9cb573c946bb77403b4c51e3a,
+        type: 3}
+      propertyPath: _moneyTMP
+      value: 
+      objectReference: {fileID: 1435643567}
     - target: {fileID: 6328930685052094325, guid: 00157de9cb573c946bb77403b4c51e3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1388,11 +1409,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8744418794799961647, guid: 00157de9cb573c946bb77403b4c51e3a,
-        type: 3}
-      propertyPath: _moneyTMP
-      value: 
-      objectReference: {fileID: 1435643567}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
