@@ -5,8 +5,6 @@ public class FishScaredState : FishState
     private Transform _playerTransform;
     private Vector3 moveDirection;
     private Vector3 movePosition;
-    private float positionMult = 6;
-    private float speedMult = 4;
     public bool startedEscaping = false;
 
     public FishScaredState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
@@ -23,7 +21,7 @@ public class FishScaredState : FishState
     {
         base.EnterState();
         moveDirection = (fish.transform.position - _playerTransform.position).normalized;
-        movePosition = fish.transform.position + moveDirection * positionMult;
+        movePosition = fish.transform.position + moveDirection * fish.PositionMult;
     }
 
     public override void ExitState()
@@ -35,7 +33,7 @@ public class FishScaredState : FishState
     {
         base.FrameUpdate();
 
-        fish.MoveAndRotateFish(movePosition, moveDirection, fish.speed * speedMult);
+        fish.MoveAndRotateFish(movePosition, moveDirection, fish.Speed * fish.SpeedMult);
 
         if (fish.IsGrabbed)
         {

@@ -36,14 +36,13 @@ public class FishIdleState : FishState
         if (fish.IsScared)
         {
             fish.StateMachine.ChangeState(fish.ScaredState);
-            Debug.Log("Fish Got Scared.");
         }
         if (fish.IsGrabbed)
         {
             fish.StateMachine.ChangeState(fish.GrabbedState);
         }
-        Vector3 targetDirection = (fish.targetPosition - fish.transform.position).normalized;
-        fish.MoveAndRotateFish(fish.targetPosition, targetDirection, fish.speed);
+        Vector3 targetDirection = (fish.TargetPosition - fish.transform.position).normalized;
+        fish.MoveAndRotateFish(fish.TargetPosition, targetDirection, fish.Speed);
     }
 
     public override void PhysicsUpdate()

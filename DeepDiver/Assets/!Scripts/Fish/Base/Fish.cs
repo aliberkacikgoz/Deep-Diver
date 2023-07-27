@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
 {
-    [field: SerializeField] public int MaxHealth { get; set; } = 1;
+    public int MaxHealth { get; set; } = 1;
     public int CurrentHealth { get; set; }
     public Rigidbody RB { get; set; }
 
@@ -13,19 +13,34 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
     public FishIdleState IdleState { get; set; }
     public FishScaredState ScaredState { get; set; }
     public FishGrabbedState GrabbedState { get; set; }
-    [field: SerializeField] public bool IsScared { get; set; }
+    public bool IsScared { get; set; }
     public bool IsGrabbed { get; set; }
 
-    public float speed = 2f;
-    public float rotateSpeed = 5f;
-    [SerializeField] private float _targetChangeTime = 2f;
-    [SerializeField] private WaitForSeconds _changeTargetInterval;
-    public Transform areaBoundary;
-    public Vector3 targetPosition;
+    [Header("Idle Movement Settings")]
+    [SerializeField] public float speed = 2f;
+    public float Speed { get { return speed; } private set { } }
+    [SerializeField] protected float rotateSpeed = 5f;
+    [SerializeField] protected float _targetChangeTime = 2f;
+    [SerializeField] protected Transform areaBoundary;
 
-    private void Awake()
+    [Header("Escaping Movement Settings")]
+    [SerializeField] protected float _escapeTime = 2f;
+    [SerializeField] protected float speedMult = 4;
+    public float SpeedMult { get { return speedMult; } private set { } }
+    [SerializeField] protected float positionMult = 6;
+    public float PositionMult { get { return positionMult; } private set { } }
+
+
+    private Vector3 targetPosition;
+    public Vector3 TargetPosition { get { return targetPosition; } private set { } }
+
+    private WaitForSeconds _changeTargetInterval;
+    private WaitForSeconds _escapeTimeInterval;
+
+    private void Start()
     {
         _changeTargetInterval = new WaitForSeconds(_targetChangeTime);
+        _escapeTimeInterval = new WaitForSeconds(_escapeTime);
 
         StateMachine = new FishStateMachine();
         IdleState = new FishIdleState(this, StateMachine);
@@ -35,10 +50,7 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
 
         CurrentHealth = MaxHealth;
         RB = GetComponent<Rigidbody>();
-    }
 
-    private void Start()
-    {
         StateMachine.Initialize(IdleState);
     }
 
@@ -78,7 +90,7 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
 
     private IEnumerator FishIsEscaping()
     {
-        yield return _changeTargetInterval;
+        yield return _escapeTimeInterval;
         StateMachine.ChangeState(IdleState);
         ScaredState.startedEscaping = false;
     }
@@ -101,7 +113,6 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, ITriggerCheckable
     public void MoveAndRotateFish(Vector3 _targetPosition, Vector3 _targetDirection, float speed)
     {
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
-        //transform.LookAt(_targetPosition);
 
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
     }

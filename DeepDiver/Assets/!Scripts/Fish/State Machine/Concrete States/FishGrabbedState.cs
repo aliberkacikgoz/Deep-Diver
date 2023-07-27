@@ -36,7 +36,7 @@ public class FishGrabbedState : FishState
     {
         base.FrameUpdate();
 
-        fish.MoveAndRotateFish(movePosition, moveDirection, fish.speed * speedMult);
+        fish.MoveAndRotateFish(movePosition, moveDirection, fish.Speed * speedMult);
 
         if (!fish.IsGrabbed)
         {
