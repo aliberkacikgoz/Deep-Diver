@@ -203,7 +203,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2031448985}
+    - targetCorrespondingSourceObject: {fileID: 6126412733609681874, guid: d0d5e75e632373248975bf3188bdb710,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 194981151}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5471738740105935740, guid: d0d5e75e632373248975bf3188bdb710,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1895497557}
     - targetCorrespondingSourceObject: {fileID: 5471738740105935740, guid: d0d5e75e632373248975bf3188bdb710,
         type: 3}
       insertIndex: -1
@@ -333,7 +341,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1347000811}
+    m_TransformParent: {fileID: 1895497555}
     m_Modifications:
     - target: {fileID: 554684771657877475, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
@@ -353,12 +361,12 @@ PrefabInstance:
     - target: {fileID: 3560980816450248340, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3560980816450248340, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6649837329956872411, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
@@ -428,37 +436,37 @@ PrefabInstance:
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.02215195
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.75016874
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.6612465
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.960022
+      value: 0.956
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1799927
+      value: 1.132
       objectReference: {fileID: 0}
     - target: {fileID: 6967253468770665536, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
@@ -483,12 +491,12 @@ PrefabInstance:
     - target: {fileID: 8789356767892297636, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8789356767892297636, guid: b0a1c563d84b08d4d81d5c2d3e39d771,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -571,10 +579,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1531077453811943880, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
       propertyPath: m_Name
       value: TunaFish (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554585876513116380, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707396716150052884, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176506243947316514, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8051042678094770048, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
@@ -644,10 +677,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1531077453811943880, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
       propertyPath: m_Name
       value: TunaFish (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554585876513116380, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707396716150052884, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176506243947316514, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8051042678094770048, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
@@ -743,7 +801,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2139160159}
-  - {fileID: 194981151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1347000812
@@ -1448,7 +1505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1547322598}
   - component: {fileID: 1547322597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SubmarineArea
   m_TagString: Submarine
   m_Icon: {fileID: 0}
@@ -1518,6 +1575,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AimTime>k__BackingField: 3
   <isMoving>k__BackingField: 0
+--- !u!114 &1895497557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895497549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505b666dcd3b6544da24f8992172210c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerOxygenData: {fileID: 11400000, guid: d5d949dfd81432543a80225f060fabdb, type: 2}
+  _oxygenWheel: {fileID: 938255983}
+  _oxygenUsageWheel: {fileID: 1441563075}
+  <OxygenLevel>k__BackingField: 0
+  <MaxOxygen>k__BackingField: 0
+  <CurrentOxygen>k__BackingField: 0
+  <OxygenLoseSpeed>k__BackingField: 0
+  <OxygenRecoverySpeed>k__BackingField: 0
 --- !u!1 &2031448984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,8 +1607,8 @@ GameObject:
   - component: {fileID: 2031448988}
   - component: {fileID: 2031448987}
   - component: {fileID: 2031448986}
-  m_Layer: 0
-  m_Name: DistanceTrigger
+  m_Layer: 6
+  m_Name: RangeTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1800,7 +1877,7 @@ GameObject:
   - component: {fileID: 2748709349385216250}
   - component: {fileID: 4346880768427697586}
   - component: {fileID: 5630587958321625992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SubmarineMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2021,10 +2098,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1531077453811943880, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
       propertyPath: m_Name
       value: TunaFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886160414221524541, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554585876513116380, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707396716150052884, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176506243947316514, guid: d493b25cbed727a489962cfeabb389fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8051042678094770048, guid: d493b25cbed727a489962cfeabb389fd,
         type: 3}
