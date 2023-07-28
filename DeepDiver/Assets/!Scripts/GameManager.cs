@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    //Singleton game manager örneði
-    public static GameManager Instance;
-    
     //Oyunun hangi evrede olduðunu gösteren enum
     public GameState CurrentState;
     /*
@@ -26,14 +20,8 @@ public class GameManager : MonoBehaviour
      *  þeklinde hangi evrede olduðu bilgisini alýp ona göre iþlem yapabilir
      * */
 
-
     //Yine ayný þekilde bu bilginin iletimini saðlayan event burda
     public static event Action<GameState> OnGameStateChanged;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void UpdateGameState(GameState newState)
     {

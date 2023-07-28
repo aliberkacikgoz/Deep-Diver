@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
+[RequireComponent(typeof(Harpoon))]
 public class PlayerAttack : MonoBehaviour, IAttacker
 {
+    [SerializeField] private Transform harpoonGun;
+
+    private Harpoon _grappling;
+
     public Rigidbody RB { get; set; }
 
     public Transform RangeTrigger { get; set; }
@@ -25,6 +30,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         RB = GetComponent<Rigidbody>();
         PossibleTargetList = new List<Transform>();
         aimTimeWaitForSeconds = new WaitForSeconds(AimTime);
+        _grappling = GetComponent<Harpoon>();
     }
 
 
@@ -54,6 +60,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         if (hasTarget)
         {
             transform.LookAt(Target);
+            harpoonGun.LookAt(Target);
             return;
         }
 
@@ -79,6 +86,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     public void StartCathcing()
     {
         Debug.Log("Took a shot!");
+        _grappling.StartGrapple();
         CaughtFish();
     }
 
@@ -90,9 +98,10 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     public void CaughtFish()
     {
         PossibleTargetList.Remove(Target);
-        Target.GetComponent<Fish>().Die();
+        //Target.GetComponent<Fish>().Die();
         hasTarget = false;
         AimingCoroutine = null;
+        //_grappling.StopGrapple();
     }
 
     public void UpgradePower()

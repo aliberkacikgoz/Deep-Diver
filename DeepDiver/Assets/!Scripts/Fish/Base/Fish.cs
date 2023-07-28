@@ -115,7 +115,13 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
     {
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
+
+        Vector3 desiredVelocity = (_targetPosition - transform.position).normalized * speed;
+        Vector3 force = (desiredVelocity - RB.velocity) / Time.fixedDeltaTime;
+
+        RB.AddForce(force);
+
+        //transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
     }
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)

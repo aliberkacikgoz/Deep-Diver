@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TunaFishSO
   m_EditorClassIdentifier: 
   MaxHealth: 1
+  CatchTime: 3
   speed: 1.5
   rotateSpeed: 10
   _targetChangeTime: 2

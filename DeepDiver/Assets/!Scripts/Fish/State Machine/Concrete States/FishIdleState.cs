@@ -41,12 +41,15 @@ public class FishIdleState : FishState
         {
             fish.StateMachine.ChangeState(fish.GrabbedState);
         }
-        Vector3 targetDirection = (fish.TargetPosition - fish.transform.position).normalized;
-        fish.MoveAndRotateFish(fish.TargetPosition, targetDirection, fish.Speed);
+        //Vector3 targetDirection = (fish.TargetPosition - fish.transform.position).normalized;
+        //fish.MoveAndRotateFish(fish.TargetPosition, targetDirection, fish.Speed);
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        Vector3 targetDirection = (fish.TargetPosition - fish.transform.position).normalized;
+        fish.MoveAndRotateFish(fish.TargetPosition, targetDirection, fish.Speed);
     }
 }
