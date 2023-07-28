@@ -9,7 +9,10 @@ public class FishScaredState : FishState
 
     public FishScaredState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (GameObject.FindGameObjectWithTag("Player").transform != null)
+        {
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     public override void AnimationTriggerEvent(Fish.AnimationTriggerType triggerType)

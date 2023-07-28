@@ -5,6 +5,7 @@ public class FishData : ScriptableObject
 {
     [Header("Health Settings")]
     public int MaxHealth = 1;
+    public int CatchTime = 3;
 
     [Header("Idle Movement Settings")]
     public float speed = 2f;
