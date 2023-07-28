@@ -4,6 +4,7 @@ using UnityEngine;
 public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckable
 {
     public int MaxHealth { get; set; } = 1;
+    public int CatchTime { get; set; }
     public int CurrentHealth { get; set; }
     public Rigidbody RB { get; set; }
 
@@ -31,6 +32,7 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
 
     private Vector3 targetPosition;
     public Vector3 TargetPosition { get { return targetPosition; } private set { } }
+
 
     private WaitForSeconds _changeTargetInterval;
     private WaitForSeconds _escapeTimeInterval;
@@ -113,7 +115,13 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
     {
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
 
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
+
+        Vector3 desiredVelocity = (_targetPosition - transform.position).normalized * speed;
+        Vector3 force = (desiredVelocity - RB.velocity) / Time.fixedDeltaTime;
+
+        RB.AddForce(force);
+
+        //transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
     }
 
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)

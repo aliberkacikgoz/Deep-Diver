@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FishScaredState : FishState
@@ -9,7 +10,10 @@ public class FishScaredState : FishState
 
     public FishScaredState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (GameObject.FindGameObjectWithTag("Player").transform != null)
+        {
+            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     public override void AnimationTriggerEvent(Fish.AnimationTriggerType triggerType)
@@ -33,8 +37,6 @@ public class FishScaredState : FishState
     {
         base.FrameUpdate();
 
-        fish.MoveAndRotateFish(movePosition, moveDirection, fish.Speed * fish.SpeedMult);
-
         if (fish.IsGrabbed)
         {
             fish.StateMachine.ChangeState(fish.GrabbedState);
@@ -50,5 +52,6 @@ public class FishScaredState : FishState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        fish.MoveAndRotateFish(movePosition, moveDirection, fish.Speed * fish.SpeedMult);
     }
 }
