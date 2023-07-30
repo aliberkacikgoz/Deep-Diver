@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 
 public class TriggerCheck : MonoBehaviour
 {
     [SerializeField] string _requiredOtherTag;
-    [SerializeField] float _delayTime = 2.0f;
-
+    [SerializeField] float _delayTime = .5f;
     [SerializeField] TriggerChannelSO _desiredTrigger;
 
     bool _isPlayerEntered = false;
-    float _enterTime;
+    float _endTime;
+
+    public event Action<float> OnStep;
+    //public float Step => Mathf.Clamp01((Time.time - (_enterTime + _delayTime)) / _delayTime);
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +19,7 @@ public class TriggerCheck : MonoBehaviour
             return;
            
         _isPlayerEntered = true;
-        _enterTime = Time.time;
+        _endTime = Time.time + _delayTime;
     }
 
     private void OnTriggerExit(Collider other)
@@ -25,6 +28,7 @@ public class TriggerCheck : MonoBehaviour
             return;
 
         _isPlayerEntered = false;
+        OnStep?.Invoke(0);
     }
 
     private bool CheckCredentials(string otherTag)
@@ -37,12 +41,18 @@ public class TriggerCheck : MonoBehaviour
         if (!_isPlayerEntered)
             return;
 
-        if (Time.time < _enterTime + _delayTime)
-            return;
+ 
+        if (Time.time < _endTime) 
+        {
+            float step = (_endTime - Time.time) / _delayTime;
+            step = Mathf.Clamp01(step);
 
+            OnStep?.Invoke(1f - step);
+            return;
+        }
+      
         _isPlayerEntered = false;
         _desiredTrigger?.Invoke();
     }
-
 
 }
