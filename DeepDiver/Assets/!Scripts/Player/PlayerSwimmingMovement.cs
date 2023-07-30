@@ -8,6 +8,8 @@ public class PlayerSwimmingMovement : MonoBehaviour
     [SerializeField]
     private MovementListenerSO _movementListener;
 
+    public Animator animator;
+
     private Vector2 _movementAmount;
     private Rigidbody _rigidbody;
 
@@ -61,12 +63,22 @@ public class PlayerSwimmingMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        animator.SetBool("Idle", true);
     }
 
     private void FixedUpdate()
     {
         //if (activeGrapple) return;
-
+        if (_movementAmount == Vector2.zero)
+        {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Swimming", false);
+        }
+        else
+        {
+            animator.SetBool("Swimming", true);
+            animator.SetBool("Idle", false);
+        }
 
         //if its normal walk it will be in x and z axis
         _scaledMovement = _playerSpeed * Time.fixedDeltaTime * new Vector3(
