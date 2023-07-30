@@ -61,6 +61,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 22270925559344442}
     m_Modifications:
+    - target: {fileID: 969633987084245955, guid: 144d7a218a383a3469be9343483a169b,
+        type: 3}
+      propertyPath: m_Name
+      value: Swim Trigger
+      objectReference: {fileID: 0}
     - target: {fileID: 8411466230614822514, guid: 144d7a218a383a3469be9343483a169b,
         type: 3}
       propertyPath: m_Name
@@ -116,7 +121,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5727801525985830484, guid: 144d7a218a383a3469be9343483a169b, type: 3}
     m_RemovedGameObjects:
     - {fileID: -4098526255572394396, guid: 144d7a218a383a3469be9343483a169b, type: 3}
     - {fileID: -4439822772996280733, guid: 144d7a218a383a3469be9343483a169b, type: 3}
@@ -129,7 +135,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3370520897113259536}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 969633987084245955, guid: 144d7a218a383a3469be9343483a169b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6452775369481603743}
+    - targetCorrespondingSourceObject: {fileID: 969633987084245955, guid: 144d7a218a383a3469be9343483a169b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1690901016442967113}
   m_SourcePrefab: {fileID: 100100000, guid: 144d7a218a383a3469be9343483a169b, type: 3}
 --- !u!4 &2950987759098370650 stripped
 Transform:
@@ -137,6 +151,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5904612129097400009}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6666930037593040138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 969633987084245955, guid: 144d7a218a383a3469be9343483a169b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5904612129097400009}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6452775369481603743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666930037593040138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe616824a2190b43a4483457291db66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _requiredOtherTag: PlayerWalker
+  _requiredTriggerTag: SubTrigger
+  _triggerChecked: {fileID: 11400000, guid: ddc08e67fa804a048a09519271ffc586, type: 2}
+--- !u!114 &1690901016442967113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666930037593040138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6a0a490772eb44695c2b0be1df7530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerChecked: {fileID: 11400000, guid: ddc08e67fa804a048a09519271ffc586, type: 2}
+  _swimmingStartTrigger: {fileID: 11400000, guid: 7dab918d5962c7e428cf62a4fa09d25f,
+    type: 2}
 --- !u!1001 &6965283232704635860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Walking
       objectReference: {fileID: 0}
+    - target: {fileID: 6892827549414640867, guid: 26ece85ceccfb0c419a69ab28b2dd0a5,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
