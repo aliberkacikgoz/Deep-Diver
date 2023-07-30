@@ -37,11 +37,11 @@ public class PlayerSubmarineMovement : MonoBehaviour
             0
         );
 
-        if ( scaledMovement != Vector3.zero ) {
-            Vector3 heading = scaledMovement.normalized;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward * -1, heading);
+        //if ( scaledMovement != Vector3.zero ) {
+            //Vector3 heading = scaledMovement.normalized;
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward * -1, heading);
 
-        }
+        //}
 
         //Rigidbody moves the player
         _rigidbody.MovePosition(transform.position + scaledMovement);
