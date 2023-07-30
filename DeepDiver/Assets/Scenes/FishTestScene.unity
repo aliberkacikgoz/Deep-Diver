@@ -1522,12 +1522,6 @@ Transform:
   - {fileID: 2748709349385216250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1869780450 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1507094024742290678, guid: f46cd912929336045819cd03de95c735,
-    type: 3}
-  m_PrefabInstance: {fileID: 4853295445059267333}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1907350690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,26 +2294,6 @@ PrefabInstance:
       propertyPath: catchBar
       value: 
       objectReference: {fileID: 3233884533386749549}
-    - target: {fileID: 1485232200718157854, guid: f46cd912929336045819cd03de95c735,
-        type: 3}
-      propertyPath: harpoonGun
-      value: 
-      objectReference: {fileID: 1869780450}
-    - target: {fileID: 1507094024742290678, guid: f46cd912929336045819cd03de95c735,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1507094024742290678, guid: f46cd912929336045819cd03de95c735,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1507094024742290678, guid: f46cd912929336045819cd03de95c735,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.025
-      objectReference: {fileID: 0}
     - target: {fileID: 3116377687394420800, guid: f46cd912929336045819cd03de95c735,
         type: 3}
       propertyPath: m_AnchorMax.x
