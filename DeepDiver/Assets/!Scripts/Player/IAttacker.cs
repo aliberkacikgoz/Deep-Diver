@@ -11,7 +11,7 @@ public interface IAttacker
     Transform Target { get; set; }
     List<Transform> PossibleTargetList { get; set; }
     
-    int AimTime { get; set; }
+    float AimTime { get; set; }
     int CatchPower { get; set; }
     bool hasTarget { get; set; }
     bool isMoving { get; set; }
@@ -22,7 +22,7 @@ public interface IAttacker
     void StartAiming(Transform target);
     void StopAiming();
     void StartCathcing();
-    void StopCathcing();
+    void StopCathcing(Fish target);
 
     IEnumerator Aim();
 

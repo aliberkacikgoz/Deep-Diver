@@ -8,6 +8,7 @@ public class TunaFish : Fish
     private void OnEnable()
     {
         MaxHealth= _fishData.MaxHealth;
+        CatchTime= _fishData.CatchTime;
         speed = _fishData.speed;
         rotateSpeed = _fishData.rotateSpeed;
         _targetChangeTime = _fishData.  _targetChangeTime;

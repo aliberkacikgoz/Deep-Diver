@@ -4,7 +4,7 @@ using UnityEngine;
 public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckable
 {
     public int MaxHealth { get; set; } = 1;
-    public int CatchTime { get; set; }
+    [field: SerializeField] public int CatchTime { get; set; }
     public int CurrentHealth { get; set; }
     public Rigidbody RB { get; set; }
 
@@ -33,14 +33,28 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
     private Vector3 targetPosition;
     public Vector3 TargetPosition { get { return targetPosition; } private set { } }
 
+    private bool _disableFishMovement = false;
+    public bool DisableFishMovement
+    {
+        get
+        {
+            return _disableFishMovement;
+        }
+        set
+        {
+            _disableFishMovement = value;
+        }
+    }
 
     private WaitForSeconds _changeTargetInterval;
     private WaitForSeconds _escapeTimeInterval;
+    private WaitForSeconds _getCaughtTimeInterval;
 
     private void Start()
     {
         _changeTargetInterval = new WaitForSeconds(_targetChangeTime);
         _escapeTimeInterval = new WaitForSeconds(_escapeTime);
+        _getCaughtTimeInterval = new WaitForSeconds(CatchTime);
 
         StateMachine = new FishStateMachine();
         IdleState = new FishIdleState(this, StateMachine);
@@ -105,6 +119,15 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
         }
     }
 
+    public IEnumerator GettingCaught(PlayerAttack playerAttack)
+    {
+        yield return _getCaughtTimeInterval;
+        if (!playerAttack.catchSuccesfull)
+        {
+            playerAttack.CheckIfSuccesfull();
+        }
+    }
+
     public void Die()
     {
         Debug.Log("Fish Died!");
@@ -116,6 +139,7 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
 
 
+        if (_disableFishMovement) return;
         Vector3 desiredVelocity = (_targetPosition - transform.position).normalized * speed;
         Vector3 force = (desiredVelocity - RB.velocity) / Time.fixedDeltaTime;
 

@@ -10,9 +10,9 @@ public class FishScaredState : FishState
 
     public FishScaredState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
     {
-        if (GameObject.FindGameObjectWithTag("Player").transform != null)
+        if (GameObject.FindGameObjectWithTag("PlayerSwimmer") != null)
         {
-            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            _playerTransform = GameObject.FindGameObjectWithTag("PlayerSwimmer").transform;
         }
     }
 
