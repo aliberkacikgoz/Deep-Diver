@@ -114,7 +114,6 @@ public class PlayerStateHandler : MonoBehaviour
         if (_playerSwimming.activeInHierarchy)
             _playerSwimming.SetActive(false);
         
-
         //camera switch
 
         // if not active, activate player walking controls

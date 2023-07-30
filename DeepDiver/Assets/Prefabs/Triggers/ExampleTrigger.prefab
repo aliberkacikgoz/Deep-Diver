@@ -119,4 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _requiredOtherTag: PlayerSub
+  _delayTime: 2
   _desiredTrigger: {fileID: 11400000, guid: 1286deaf3bea06449948972fdc0ea739, type: 2}
