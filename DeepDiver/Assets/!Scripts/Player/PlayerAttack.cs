@@ -88,6 +88,9 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StartAiming(Transform target)
     {
+        _playerSwimmingMovement.animator.SetBool("Swimming", false);
+        _playerSwimmingMovement.animator.SetBool("Idle", false);
+        _playerSwimmingMovement.animator.SetBool("Aiming", true);
         hasTarget = true;
         if (AimingCoroutine != null) return;
         //Debug.Log("Started Aiming.");
@@ -96,6 +99,8 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StopAiming()
     {
+        _playerSwimmingMovement.animator.SetBool("Aiming", false);
+        _playerSwimmingMovement.animator.SetBool("Shooting", false);
         //Debug.Log("Stopped aiming.");
         hasTarget = false;
         StopCoroutine(AimingCoroutine);
@@ -104,6 +109,8 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StartCathcing()
     {
+        _playerSwimmingMovement.animator.SetBool("Aiming", false);
+        _playerSwimmingMovement.animator.SetBool("Shooting", true);
         //Debug.Log("Took a shot!");
         StopFish();
         AimingCoroutine = null;
@@ -131,7 +138,6 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         _fish.SetScaredStatus(true);
     }
 
-
     public void CheckIfSuccesfull()
     {
         if (catchSuccesfull)
@@ -149,6 +155,8 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StopCathcing()
     {
+        _playerSwimmingMovement.animator.SetBool("Aiming", false);
+        _playerSwimmingMovement.animator.SetBool("Shooting", false);
         //Debug.Log("Fish escaped!");
         startedCatching = false;
         hasTarget = false;
@@ -158,6 +166,8 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void CaughtFish()
     {
+        _playerSwimmingMovement.animator.SetBool("Aiming", false);
+        _playerSwimmingMovement.animator.SetBool("Shooting", false);
         //Debug.Log("Got fish!");
         startedCatching = false;
         PossibleTargetList.Remove(Target);
