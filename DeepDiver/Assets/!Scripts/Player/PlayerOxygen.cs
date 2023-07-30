@@ -84,7 +84,7 @@ public class PlayerOxygen : MonoBehaviour, IBreather
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Submarine"))
+        if (other.CompareTag("PlayerSub"))
         {
             isUnderWater = false;
         }
@@ -92,7 +92,7 @@ public class PlayerOxygen : MonoBehaviour, IBreather
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Submarine"))
+        if (other.CompareTag("PlayerSub"))
         {
             isUnderWater = true;
         }
