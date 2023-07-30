@@ -11,24 +11,37 @@ public class PlayerSwimmingMovement : MonoBehaviour
     private Vector2 _movementAmount;
     private Rigidbody _rigidbody;
 
-    //[SerializeField] private bool _disableSwimmingMovement = false;
     //private bool activeGrapple;
     //private Vector3 velocityToSet;
     //private bool enableMovementOnNextTouch;
-
     //private Harpoon _harpoon;
 
-    //public bool DisableMovement
-    //{
-    //    get
-    //    {
-    //        return _disableSwimmingMovement;
-    //    }
-    //    set
-    //    {
-    //        _disableSwimmingMovement = value;
-    //    }
-    //}
+    public bool canNotRotate = false;
+    [SerializeField] private bool _disableSwimmingMovement = false;
+    public bool DisableSwimmingMovement
+    {
+        get
+        {
+            return _disableSwimmingMovement;
+        }
+        set
+        {
+            _disableSwimmingMovement = value;
+        }
+    }
+
+    private Vector3 _scaledMovement;
+    public Vector3 ScaledMovement
+    {
+        get
+        {
+            return _scaledMovement;
+        }
+        set
+        {
+            _scaledMovement = value;
+        }
+    }
 
     private void OnEnable()
     {
@@ -53,24 +66,24 @@ public class PlayerSwimmingMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //if (activeGrapple) return;
-        //if (_disableSwimmingMovement) return;
 
 
         //if its normal walk it will be in x and z axis
-        Vector3 scaledMovement = _playerSpeed * Time.fixedDeltaTime * new Vector3(
+        _scaledMovement = _playerSpeed * Time.fixedDeltaTime * new Vector3(
             _movementAmount.x,
             _movementAmount.y,
             0
         );
 
-        if ( scaledMovement != Vector3.zero ) {
-            Vector3 heading = scaledMovement.normalized;
+        if (_scaledMovement != Vector3.zero ) {
+            Vector3 heading = _scaledMovement.normalized;
+            if (canNotRotate) return;
             transform.rotation = Quaternion.LookRotation(Vector3.forward * -1, heading);
-
         }
 
+        if (_disableSwimmingMovement) return;
         //Rigidbody moves the player
-        _rigidbody.MovePosition(transform.position + scaledMovement);
+        _rigidbody.MovePosition(transform.position + _scaledMovement);
     }
 
     public void Move(Vector2 moveVector)

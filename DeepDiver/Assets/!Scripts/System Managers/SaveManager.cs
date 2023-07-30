@@ -25,4 +25,16 @@ public class SaveManager : MonoSingleton<SaveManager>
         return PlayerPrefs.GetInt("PlayerOxygenLevelSave", 0);
     }
     #endregion
+
+    #region PlayerInventory
+    public void SavePlayerInventoryLevel(int saveLevel)
+    {
+        PlayerPrefs.SetInt("PlayerInventoryLevelSave", saveLevel);
+    }
+
+    public int LoadPlayerInventoryLevel()
+    {
+        return PlayerPrefs.GetInt("PlayerInventoryLevelSave", 0);
+    }
+    #endregion
 }

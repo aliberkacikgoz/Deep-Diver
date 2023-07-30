@@ -10,9 +10,9 @@ public class FishScaredState : FishState
 
     public FishScaredState(Fish fish, FishStateMachine fishStateMachine) : base(fish, fishStateMachine)
     {
-        if (GameObject.FindGameObjectWithTag("Player").transform != null)
+        if (GameObject.FindGameObjectWithTag("PlayerSwimmer") != null)
         {
-            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            _playerTransform = GameObject.FindGameObjectWithTag("PlayerSwimmer").transform;
         }
     }
 
@@ -26,6 +26,10 @@ public class FishScaredState : FishState
         base.EnterState();
         moveDirection = (fish.transform.position - _playerTransform.position).normalized;
         movePosition = fish.transform.position + moveDirection * fish.PositionMult;
+
+        if (startedEscaping) return;
+        fish.StartFishIsEscaping();
+        startedEscaping = true;
     }
 
     public override void ExitState()

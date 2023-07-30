@@ -5,11 +5,13 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 [RequireComponent(typeof(Harpoon))]
+[RequireComponent(typeof(CatchFishBar))]
 public class PlayerAttack : MonoBehaviour, IAttacker
 {
     [SerializeField] private Transform harpoonGun;
 
-    private Harpoon _grappling;
+    private PlayerSwimmingMovement _playerSwimmingMovement;
+    private Harpoon _harpoon;
 
     public Rigidbody RB { get; set; }
 
@@ -17,7 +19,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     public Transform Target { get; set; }
     public List<Transform> PossibleTargetList { get; set; }
 
-    [field: SerializeField] public int AimTime { get; set; } = 3;
+    [field: SerializeField] public float AimTime { get; set; } = 3;
     public int CatchPower { get; set; }
     public bool hasTarget { get; set; } = false;
     [field: SerializeField]public bool isMoving { get; set; }
@@ -25,14 +27,21 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     public WaitForSeconds aimTimeWaitForSeconds { get; set; }
     public Coroutine AimingCoroutine { get; set; }
 
+    public bool catchSuccesfull = false;
+    public bool startedCatching = false;
+
+    private Fish _fish;
+    private CatchFishBar _catchFishBar;
+
     private void Awake()
     {
         RB = GetComponent<Rigidbody>();
         PossibleTargetList = new List<Transform>();
         aimTimeWaitForSeconds = new WaitForSeconds(AimTime);
-        _grappling = GetComponent<Harpoon>();
+        _harpoon = GetComponent<Harpoon>();
+        _playerSwimmingMovement = GetComponent<PlayerSwimmingMovement>();
+        _catchFishBar = GetComponent<CatchFishBar>();
     }
-
 
     private void OnEnable()
     {
@@ -59,8 +68,9 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
         if (hasTarget)
         {
-            transform.LookAt(Target);
             harpoonGun.LookAt(Target);
+            if (startedCatching) return;
+            transform.LookAt(Target);
             return;
         }
 
@@ -68,16 +78,25 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         StartAiming(Target);
     }
 
+    private void LateUpdate()
+    {
+        //if (startedCatching)
+        //{
+        //    FishLookAway();
+        //}
+    }
+
     public void StartAiming(Transform target)
     {
         hasTarget = true;
         if (AimingCoroutine != null) return;
-        Debug.Log("Started Aiming.");
+        //Debug.Log("Started Aiming.");
         AimingCoroutine = StartCoroutine(Aim());
     }
 
     public void StopAiming()
     {
+        //Debug.Log("Stopped aiming.");
         hasTarget = false;
         StopCoroutine(AimingCoroutine);
         AimingCoroutine = null;
@@ -85,23 +104,70 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StartCathcing()
     {
-        Debug.Log("Took a shot!");
-        _grappling.StartGrapple();
-        CaughtFish();
+        //Debug.Log("Took a shot!");
+        StopFish();
+        AimingCoroutine = null;
+        _playerSwimmingMovement.DisableSwimmingMovement = true;
+        _harpoon.StartGrapple();
+        startedCatching = true;
+        _catchFishBar.GetFishInfo(_fish);
+        StartCoroutine(_fish.GettingCaught(this));
+    }
+
+    private void StopFish()
+    {
+        _fish = Target.GetComponent<Fish>();
+        _fish.DisableFishMovement = true;
+        _fish.transform.forward = -(transform.position - _fish.transform.position).normalized;
+        _fish.RB.isKinematic = true;
+    }
+
+    private void LetFishGo()
+    {
+        if (_fish == null) return;
+        PossibleTargetList.Remove(_fish.transform);
+        _fish.DisableFishMovement = false;
+        _fish.RB.isKinematic = false;
+        _fish.SetScaredStatus(true);
+    }
+
+
+    public void CheckIfSuccesfull()
+    {
+        if (catchSuccesfull)
+        {
+            CaughtFish();
+        }
+        else
+        {
+            StopCathcing();
+            LetFishGo();
+            //Debug.Log("Time ran out.");
+        }
+        _catchFishBar.catchBar.value = 0;
     }
 
     public void StopCathcing()
     {
+        //Debug.Log("Fish escaped!");
+        startedCatching = false;
         hasTarget = false;
+        _playerSwimmingMovement.DisableSwimmingMovement = false;
+        _harpoon.StopGrapple();
     }
 
     public void CaughtFish()
     {
+        //Debug.Log("Got fish!");
+        startedCatching = false;
         PossibleTargetList.Remove(Target);
-        //Target.GetComponent<Fish>().Die();
         hasTarget = false;
+        _playerSwimmingMovement.DisableSwimmingMovement = false;
         AimingCoroutine = null;
-        //_grappling.StopGrapple();
+        _harpoon.StopGrapple();
+        InventoryManager.Instance.GainFish();
+        catchSuccesfull = false;
+        _fish.Die();
     }
 
     public void UpgradePower()
@@ -111,7 +177,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public IEnumerator Aim()
     {
-        Debug.Log("Aiming...");
+        //Debug.Log("Aiming...");
         yield return aimTimeWaitForSeconds;
         StartCathcing();
     }
@@ -128,6 +194,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     {
         if (other.CompareTag("Fish"))
         {
+            //Debug.Log("Fish moved out of range.");
             PossibleTargetList.Remove(other.gameObject.transform);
             if (Target != other.gameObject.transform) return;
             if (AimingCoroutine == null) return;

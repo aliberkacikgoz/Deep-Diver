@@ -7,7 +7,7 @@ public class FishScaredCheck : MonoBehaviour
 
     private void Awake()
     {
-        PlayerTarget = GameObject.FindGameObjectWithTag("Player");
+        PlayerTarget = GameObject.FindGameObjectWithTag("PlayerSwimmer");
         _fish = GetComponentInParent<Fish>();
     }
 

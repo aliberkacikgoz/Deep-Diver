@@ -4,7 +4,7 @@ using UnityEngine;
 public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckable
 {
     public int MaxHealth { get; set; } = 1;
-    public int CatchTime { get; set; }
+    [field: SerializeField] public int CatchTime { get; set; }
     public int CurrentHealth { get; set; }
     public Rigidbody RB { get; set; }
 
@@ -33,14 +33,28 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
     private Vector3 targetPosition;
     public Vector3 TargetPosition { get { return targetPosition; } private set { } }
 
+    private bool _disableFishMovement = false;
+    public bool DisableFishMovement
+    {
+        get
+        {
+            return _disableFishMovement;
+        }
+        set
+        {
+            _disableFishMovement = value;
+        }
+    }
 
     private WaitForSeconds _changeTargetInterval;
     private WaitForSeconds _escapeTimeInterval;
+    private WaitForSeconds _getCaughtTimeInterval;
 
     private void Start()
     {
         _changeTargetInterval = new WaitForSeconds(_targetChangeTime);
         _escapeTimeInterval = new WaitForSeconds(_escapeTime);
+        _getCaughtTimeInterval = new WaitForSeconds(CatchTime);
 
         StateMachine = new FishStateMachine();
         IdleState = new FishIdleState(this, StateMachine);
@@ -90,9 +104,12 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
 
     private IEnumerator FishIsEscaping()
     {
+        //Debug.Log("Fish started escaping");
         yield return _escapeTimeInterval;
         StateMachine.ChangeState(IdleState);
         ScaredState.startedEscaping = false;
+        SetScaredStatus(false);
+        //Debug.Log("Fish is done escaping");
     }
 
     public void Damage(int damageAmount)
@@ -105,14 +122,32 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
         }
     }
 
+    public IEnumerator GettingCaught(PlayerAttack playerAttack)
+    {
+        //Debug.Log("Coroutine started.");
+        yield return _getCaughtTimeInterval;
+        if (!playerAttack.catchSuccesfull)
+        {
+            playerAttack.catchSuccesfull = false;
+            playerAttack.CheckIfSuccesfull();
+        }
+        else
+        {
+            yield return null;
+        }
+        //Debug.Log("Coroutine finished.");
+    }
+
     public void Die()
     {
-        Debug.Log("Fish Died!");
+        //Debug.Log("Fish Died!");
         Destroy(gameObject);
     }
 
     public void MoveAndRotateFish(Vector3 _targetPosition, Vector3 _targetDirection, float speed)
     {
+        if (_disableFishMovement) return;
+
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
 
 

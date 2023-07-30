@@ -1,18 +1,19 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rope))]
 public class Harpoon : MonoBehaviour
 {
-    [SerializeField] private Transform _firePoint;
+    public Transform firePoint;
     [SerializeField] private LayerMask _whatIsGrappleable;
     [SerializeField] private float _grappleDelayTime;
     [SerializeField] private float overshootYAxis;
     [SerializeField] private LineRenderer _lineRenderer;
     
     private PlayerSwimmingMovement _swimmingMovement;
-    private Vector3 _currentGrapplePoint;
+    public Vector3 currentGrapplePoint;
     private Transform _currentGrappleFish;
 
-    private bool _isGrappling;
+    public bool isGrappling;
 
     private void Awake()
     {
@@ -20,38 +21,35 @@ public class Harpoon : MonoBehaviour
         _swimmingMovement = GetComponent<PlayerSwimmingMovement>();
     }
 
-    private void LateUpdate()
-    {
-        if (_isGrappling) 
-        {
-            _lineRenderer.SetPosition(0, _firePoint.position);
-            _lineRenderer.SetPosition(1, _currentGrappleFish.position);
-        }
-    }
+    //private void LateUpdate()
+    //{
+    //    if (isGrappling) 
+    //    {
+    //        _lineRenderer.SetPosition(0, firePoint.position);
+    //        _lineRenderer.SetPosition(1, _currentGrappleFish.position);
+    //    }
+    //}
 
     public void StartGrapple()
     {
-        _isGrappling = true;
+        isGrappling = true;
 
         //_swimmingMovement.DisableMovement = true;
 
         RaycastHit hit;
-        if (Physics.Raycast(_firePoint.position, _firePoint.forward, out hit, 100, _whatIsGrappleable))
+        if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, 100, _whatIsGrappleable))
         {
-            _currentGrapplePoint = hit.point;
             _currentGrappleFish = hit.transform;
+            currentGrapplePoint = _currentGrappleFish.position;
 
-            Invoke(nameof(ExecuteGrapple), _grappleDelayTime);
+            //Invoke(nameof(ExecuteGrapple), _grappleDelayTime);
+            _lineRenderer.enabled = true;
         }
         else
         {
-            _currentGrapplePoint = _firePoint.position + _firePoint.forward * 100;
-
-            Invoke(nameof(StopGrapple), _grappleDelayTime);
+            _lineRenderer.enabled = false;
         }
-
-        _lineRenderer.enabled = true;
-        _lineRenderer.SetPosition(1, _currentGrapplePoint);
+        //_lineRenderer.SetPosition(1, currentGrapplePoint);
     }
 
     public void ExecuteGrapple()
@@ -67,13 +65,13 @@ public class Harpoon : MonoBehaviour
 
         //_swimmingMovement.JumpToPosition(_currentGrapplePoint, highestPointOnArc);
 
-        Invoke(nameof(StopGrapple), 1f);
+        //Invoke(nameof(StopGrapple), 1f);
     }
 
     public void StopGrapple()
     {
-        _isGrappling = false;
-        //_swimmingMovement.DisableMovement = false;
+        isGrappling = false;
         _lineRenderer.enabled = false;
+        //_swimmingMovement.DisableMovement = false;
     }
 }
