@@ -8,7 +8,11 @@ public class TriggerCheck : MonoBehaviour
     [SerializeField] TriggerChannelSO _desiredTrigger;
 
     bool _isPlayerEntered = false;
+    [SerializeField] bool isPlayerOxygenUpgrade = false;
+    [SerializeField] bool isPlayerCapacityUpgrade = false;
     float _endTime;
+
+    private bool _upgradedOnce = false;
 
     public event Action<float> OnStep;
     //public float Step => Mathf.Clamp01((Time.time - (_enterTime + _delayTime)) / _delayTime);
@@ -29,6 +33,7 @@ public class TriggerCheck : MonoBehaviour
 
         _isPlayerEntered = false;
         OnStep?.Invoke(0);
+        _upgradedOnce = false;
     }
 
     private bool CheckCredentials(string otherTag)
@@ -50,6 +55,30 @@ public class TriggerCheck : MonoBehaviour
             OnStep?.Invoke(1f - step);
             return;
         }
+
+        if (isPlayerOxygenUpgrade)
+        {
+            if (MoneyManager.Instance.CurrentPlayerMoney >= 200)
+            {
+                if (_upgradedOnce) return;
+                UpgradeManager.Instance.UpgradePlayerOxygenLevel();
+                MoneyManager.Instance.SpendMoney(200);
+                _upgradedOnce = true;
+            }
+            return;
+        }
+        else if (isPlayerCapacityUpgrade)
+        {
+            if (MoneyManager.Instance.CurrentPlayerMoney >= 200)
+            {
+                if (_upgradedOnce) return;
+                UpgradeManager.Instance.UpgradePlayerInventory();
+                MoneyManager.Instance.SpendMoney(200);
+                _upgradedOnce = true;
+            }
+            return;
+        }
+        
       
         _isPlayerEntered = false;
         _desiredTrigger?.Invoke();

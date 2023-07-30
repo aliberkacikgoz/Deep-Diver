@@ -7,6 +7,13 @@ public class MoneyManager : MonoSingleton<MoneyManager>
     [SerializeField] private TextMeshProUGUI _moneyTMP;
     [Header("Current Player Money")]
     [SerializeField] private int _currentPlayerMoney;
+    public int CurrentPlayerMoney 
+    {
+        get
+        {
+            return _currentPlayerMoney;
+        }
+    }
 
     [Header("Money Change Lerp Time")]
     [SerializeField]private float _lerpTime;

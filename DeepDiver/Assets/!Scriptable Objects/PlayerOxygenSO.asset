@@ -16,3 +16,14 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 500
+  OxygenLoseSpeedArray:
+  - 5
+  - 3
+  - 1
+  - 0
+  OxygenRecoverySpeedArray:
+  - 5
+  - 10
+  - 20
+  - 30
