@@ -124,17 +124,18 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         }
         else
         {
-            StopCathcing(_fish);
+            StopCathcing();
+            //Debug.Log("Time ran out.");
         }
         _catchFishBar.catchBar.value = 0;
     }
 
-    public void StopCathcing(Fish target)
+    public void StopCathcing()
     {
         //Debug.Log("Fish escaped!");
         startedCatching = false;
         hasTarget = false;
-        target.DisableFishMovement = false;
+        _fish.DisableFishMovement = false;
         _playerSwimmingMovement.DisableSwimmingMovement = false;
         _harpoon.StopGrapple();
     }
@@ -144,12 +145,13 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         //Debug.Log("Got fish!");
         startedCatching = false;
         PossibleTargetList.Remove(Target);
-        Target.GetComponent<Fish>().Die();
         hasTarget = false;
         _playerSwimmingMovement.DisableSwimmingMovement = false;
         AimingCoroutine = null;
         _harpoon.StopGrapple();
         InventoryManager.Instance.GainFish();
+        catchSuccesfull = false;
+        _fish.Die();
     }
 
     public void UpgradePower()

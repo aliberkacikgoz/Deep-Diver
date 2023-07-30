@@ -121,16 +121,18 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
 
     public IEnumerator GettingCaught(PlayerAttack playerAttack)
     {
+        //Debug.Log("Coroutine started.");
         yield return _getCaughtTimeInterval;
         if (!playerAttack.catchSuccesfull)
         {
             playerAttack.CheckIfSuccesfull();
         }
+        //Debug.Log("Coroutine finished.");
     }
 
     public void Die()
     {
-        Debug.Log("Fish Died!");
+        //Debug.Log("Fish Died!");
         Destroy(gameObject);
     }
 

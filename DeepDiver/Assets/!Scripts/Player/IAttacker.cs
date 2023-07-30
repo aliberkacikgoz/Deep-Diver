@@ -22,7 +22,7 @@ public interface IAttacker
     void StartAiming(Transform target);
     void StopAiming();
     void StartCathcing();
-    void StopCathcing(Fish target);
+    void StopCathcing();
 
     IEnumerator Aim();
 

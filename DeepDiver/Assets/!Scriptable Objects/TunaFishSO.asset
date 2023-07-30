@@ -16,7 +16,7 @@ MonoBehaviour:
   CatchTime: 3
   speed: 1.5
   rotateSpeed: 10
-  _targetChangeTime: 3
+  _targetChangeTime: 2
   _escapeTime: 2
   speedMult: 4
   positionMult: 7
