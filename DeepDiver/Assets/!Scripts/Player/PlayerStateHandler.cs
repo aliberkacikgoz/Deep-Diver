@@ -11,8 +11,7 @@ public class PlayerStateHandler : MonoBehaviour
 
     [SerializeField] Vector3 _walkingStartPosition = new Vector3(-3,0,0);
     [SerializeField] Vector3 _swimmingStartPosition = new Vector3(0,12,0);
-
-
+    [SerializeField] Vector3 _subStartRotation = new Vector3(0,0,-90);
 
     GameObject _playerSwimming;
     GameObject _playerWalking;
@@ -107,6 +106,7 @@ public class PlayerStateHandler : MonoBehaviour
         {
             _playerWalking.SetActive(true);
             _playerWalking.transform.localPosition = _walkingStartPosition;
+            _playerSubmarine.transform.localRotation = Quaternion.Euler(_subStartRotation);
         }
         
 
