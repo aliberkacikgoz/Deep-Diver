@@ -15,8 +15,6 @@ public class CameraStateHandler : MonoBehaviour
     [SerializeField] GameObject _swimCam;
     [SerializeField] GameObject _window;
 
-    private bool _wasSwimCam = false;
-
     private void OnEnable()
     {
         _swimmingStartTrigger.AddListener(ActivateSwimmingCam);
@@ -38,7 +36,6 @@ public class CameraStateHandler : MonoBehaviour
 
     private void ActivateSubmarineCam()
     {
-        _wasSwimCam = false;
         _swimCam.SetActive(false);
         _inSubCam.SetActive(false);
 
@@ -48,12 +45,6 @@ public class CameraStateHandler : MonoBehaviour
 
     private void ActivateWalkingCam()
     {
-        if (_wasSwimCam)
-        {
-            //var transposer = _inSubCam.GetComponent<CinemachineVirtualCamera>().GetComponent<CinemachineTransposer>().m_FollowOffset;
-            //transposer = new Vector3(0, 12, 40);
-        }
-        _wasSwimCam = false;
         _swimCam.SetActive(false);
         _subCam.SetActive(false);
 
@@ -63,7 +54,6 @@ public class CameraStateHandler : MonoBehaviour
 
     private void ActivateSwimmingCam()
     {
-        _wasSwimCam = true;
         _inSubCam.SetActive(false);
         _subCam.SetActive(false);
 

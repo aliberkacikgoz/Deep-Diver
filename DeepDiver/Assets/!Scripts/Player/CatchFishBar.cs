@@ -9,7 +9,7 @@ public class CatchFishBar : MonoBehaviour
     private PlayerAttack _playerAttack;
     private Vector3 joystickInputDirection;
     private Vector3 targetDirection;
-    private float fillSpeed = 12.0f;
+    private float fillSpeed = 20.0f;
 
     internal void GetFishInfo(Fish fish)
     {
@@ -43,8 +43,9 @@ public class CatchFishBar : MonoBehaviour
 
         catchBar.value = smoothStepFillAmount;
 
-        if (catchBar.value > 0.99f)
+        if (catchBar.value > 0.95f)
         {
+            catchBar.value = 1f;
             _playerAttack.catchSuccesfull = true;
             _playerAttack.CheckIfSuccesfull();
         }

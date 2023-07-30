@@ -10,6 +10,8 @@ public class PlayerWalkingMovement : MonoBehaviour
     [SerializeField]
     private MovementListenerSO _movementListener;
 
+    [SerializeField] private Animator _animator;
+
     private Vector2 _movementAmount;
     private Rigidbody _rigidbody;
 
@@ -31,6 +33,17 @@ public class PlayerWalkingMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_movementAmount == Vector2.zero)
+        {
+            _animator.SetBool("Idle", true);
+            _animator.SetBool("Walking", false);
+        }
+        else
+        {
+            _animator.SetBool("Idle", false);
+            _animator.SetBool("Walking", true);
+        }
+
         //if its normal walk it will be in x and z axis
         Vector3 scaledMovement = _playerSpeed * Time.fixedDeltaTime * new Vector3(
             _movementAmount.x,
