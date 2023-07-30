@@ -42,16 +42,13 @@ public class Harpoon : MonoBehaviour
             _currentGrappleFish = hit.transform;
             currentGrapplePoint = _currentGrappleFish.position;
 
-            Invoke(nameof(ExecuteGrapple), _grappleDelayTime);
+            //Invoke(nameof(ExecuteGrapple), _grappleDelayTime);
+            _lineRenderer.enabled = true;
         }
         else
         {
-            currentGrapplePoint = firePoint.position + firePoint.forward * 100;
-
-            Invoke(nameof(StopGrapple), _grappleDelayTime);
+            _lineRenderer.enabled = false;
         }
-
-        _lineRenderer.enabled = true;
         //_lineRenderer.SetPosition(1, currentGrapplePoint);
     }
 
@@ -74,7 +71,7 @@ public class Harpoon : MonoBehaviour
     public void StopGrapple()
     {
         isGrappling = false;
-        //_swimmingMovement.DisableMovement = false;
         _lineRenderer.enabled = false;
+        //_swimmingMovement.DisableMovement = false;
     }
 }

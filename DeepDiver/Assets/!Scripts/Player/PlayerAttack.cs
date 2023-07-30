@@ -96,6 +96,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
 
     public void StopAiming()
     {
+        //Debug.Log("Stopped aiming.");
         hasTarget = false;
         StopCoroutine(AimingCoroutine);
         AimingCoroutine = null;
@@ -104,15 +105,30 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     public void StartCathcing()
     {
         //Debug.Log("Took a shot!");
-        _fish = Target.GetComponent<Fish>();
-        _fish.DisableFishMovement = true;
-        _fish.RB.velocity = Vector3.zero;
-        _fish.transform.forward = Vector3.Lerp(transform.forward, (transform.position - _fish.transform.position).normalized, Time.deltaTime * 20f);
+        StopFish();
+        AimingCoroutine = null;
         _playerSwimmingMovement.DisableSwimmingMovement = true;
         _harpoon.StartGrapple();
         startedCatching = true;
         _catchFishBar.GetFishInfo(_fish);
         StartCoroutine(_fish.GettingCaught(this));
+    }
+
+    private void StopFish()
+    {
+        _fish = Target.GetComponent<Fish>();
+        _fish.DisableFishMovement = true;
+        _fish.transform.forward = -(transform.position - _fish.transform.position).normalized;
+        _fish.RB.isKinematic = true;
+    }
+
+    private void LetFishGo()
+    {
+        if (_fish == null) return;
+        PossibleTargetList.Remove(_fish.transform);
+        _fish.DisableFishMovement = false;
+        _fish.RB.isKinematic = false;
+        _fish.SetScaredStatus(true);
     }
 
 
@@ -125,6 +141,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         else
         {
             StopCathcing();
+            LetFishGo();
             //Debug.Log("Time ran out.");
         }
         _catchFishBar.catchBar.value = 0;
@@ -135,7 +152,6 @@ public class PlayerAttack : MonoBehaviour, IAttacker
         //Debug.Log("Fish escaped!");
         startedCatching = false;
         hasTarget = false;
-        _fish.DisableFishMovement = false;
         _playerSwimmingMovement.DisableSwimmingMovement = false;
         _harpoon.StopGrapple();
     }
@@ -178,6 +194,7 @@ public class PlayerAttack : MonoBehaviour, IAttacker
     {
         if (other.CompareTag("Fish"))
         {
+            //Debug.Log("Fish moved out of range.");
             PossibleTargetList.Remove(other.gameObject.transform);
             if (Target != other.gameObject.transform) return;
             if (AimingCoroutine == null) return;

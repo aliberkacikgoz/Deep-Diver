@@ -26,6 +26,10 @@ public class FishScaredState : FishState
         base.EnterState();
         moveDirection = (fish.transform.position - _playerTransform.position).normalized;
         movePosition = fish.transform.position + moveDirection * fish.PositionMult;
+
+        if (startedEscaping) return;
+        fish.StartFishIsEscaping();
+        startedEscaping = true;
     }
 
     public override void ExitState()

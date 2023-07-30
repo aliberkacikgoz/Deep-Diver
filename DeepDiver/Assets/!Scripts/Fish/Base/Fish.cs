@@ -104,9 +104,12 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
 
     private IEnumerator FishIsEscaping()
     {
+        //Debug.Log("Fish started escaping");
         yield return _escapeTimeInterval;
         StateMachine.ChangeState(IdleState);
         ScaredState.startedEscaping = false;
+        SetScaredStatus(false);
+        //Debug.Log("Fish is done escaping");
     }
 
     public void Damage(int damageAmount)
@@ -125,7 +128,12 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
         yield return _getCaughtTimeInterval;
         if (!playerAttack.catchSuccesfull)
         {
+            playerAttack.catchSuccesfull = false;
             playerAttack.CheckIfSuccesfull();
+        }
+        else
+        {
+            yield return null;
         }
         //Debug.Log("Coroutine finished.");
     }
@@ -138,10 +146,11 @@ public class Fish : MonoBehaviour, IDamagable, IFishMovable, IFishTriggerCheckab
 
     public void MoveAndRotateFish(Vector3 _targetPosition, Vector3 _targetDirection, float speed)
     {
+        if (_disableFishMovement) return;
+
         transform.forward = Vector3.Lerp(transform.forward, _targetDirection, Time.deltaTime * rotateSpeed);
 
 
-        if (_disableFishMovement) return;
         Vector3 desiredVelocity = (_targetPosition - transform.position).normalized * speed;
         Vector3 force = (desiredVelocity - RB.velocity) / Time.fixedDeltaTime;
 

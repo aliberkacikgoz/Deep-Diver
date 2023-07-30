@@ -9,7 +9,7 @@ public class CatchFishBar : MonoBehaviour
     private PlayerAttack _playerAttack;
     private Vector3 joystickInputDirection;
     private Vector3 targetDirection;
-    private float fillSpeed = 10.0f;
+    private float fillSpeed = 12.0f;
 
     internal void GetFishInfo(Fish fish)
     {
@@ -37,7 +37,7 @@ public class CatchFishBar : MonoBehaviour
 
         float fillAmount = (dotProduct + 1) / 2;
 
-        fillAmount = Mathf.Clamp01(fillAmount);
+        //fillAmount = Mathf.Clamp01(fillAmount);
 
         float smoothStepFillAmount = Mathf.SmoothStep(catchBar.value, fillAmount, Time.deltaTime * fillSpeed);
 
