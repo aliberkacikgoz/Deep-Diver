@@ -7,3 +7,5 @@
 - UNITY / BLENDER / PHOTOSHOP kullanılmıştır
 ##
 
+https://github.com/aliberkacikgoz/Deep-Diver/assets/135871660/ab5c6c82-12f1-4128-bf39-6d75d46eca8d
+
